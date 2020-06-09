@@ -19,7 +19,7 @@ import sys
 
 num_files = True #Add numbers to filenames.
 no_spaces = True #Remove spaces in filenames.
-split_level = "###" #The heading level to stop splitting at.By default h3 - h6
+split_level = "###" #The heading level to stop splitting at. By default h3 - h6
                     # Any header of h3, h4 etc. will be included in same file
                     # (File split is done on h2, and sub folders made on h1)
                     # (change to #### to split on lower level h3)
