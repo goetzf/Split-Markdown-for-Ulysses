@@ -17,7 +17,9 @@ import os
 # import shutil
 import sys
 
-num_files = True
+num_files = True #Add numbers to filenames
+no_spaces = True #Remove spaces in filenames
+
 path = ""
 md_file_name = "test.md"
 
@@ -44,6 +46,8 @@ def clean_file_name(fname):
     fname = fname.replace("?", "-")
     fname = fname.replace("|", "-")
     fname = fname.replace("—", "-")
+    if (no_spaces):
+        fname = fname.replace(" ", "-")
     return fname
 
 
