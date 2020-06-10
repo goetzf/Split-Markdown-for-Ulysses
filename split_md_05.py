@@ -6,7 +6,7 @@
 # Script for Splitting Markdown files into smaller files and folders
 # based on header levels: # Header 1 becomes numbered sub folders (groups),
 # and ## Header 2 becomes numbered markdown files (sheets).
-# Main folder can then be draged into Ulysses archive, either "iCloud" or "On My Mac")
+# Main folder can then be dragged into Ulysses archive, either "iCloud" or "On My Mac")
 # Handy when importing big projects from other Markdown sources.
 # Also generates combined .marked file to be opened in Marked 2.1
 
@@ -17,7 +17,13 @@ import os
 # import shutil
 import sys
 
-num_files = True
+num_files = True #Add numbers to filenames.
+no_spaces = True #Remove spaces in filenames.
+split_level = "###" #The heading level to stop splitting at. By default h3 - h6
+                    # Any header of h3, h4 etc. will be included in same file
+                    # (File split is done on h2, and sub folders made on h1)
+                    # (change to #### to split on lower level h3)
+
 path = ""
 md_file_name = "test.md"
 
@@ -44,6 +50,8 @@ def clean_file_name(fname):
     fname = fname.replace("?", "-")
     fname = fname.replace("|", "-")
     fname = fname.replace("—", "-")
+    if (no_spaces):
+        fname = fname.replace(" ", "-")
     return fname
 
 
@@ -99,10 +107,7 @@ fname = subpath + ".md"
 
 sect_text = ""
 for line in lines:
-    if line.strip().startswith("###"):  # - h3 - h6
-        # Any header of h3, h4 etc. will be included in same file
-        # (File split is done on h2, and sub folders made on h1)
-        # (change to #### to split on lower level h3)
+    if line.strip().startswith(split_level): #By default h3 and below will not be split into another file
         sect_text += line + "\n"
     elif line.strip().startswith("#"):  # - h1 and h2
         file_num += 1
